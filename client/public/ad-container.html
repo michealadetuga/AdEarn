@@ -1,0 +1,40 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AdEarn Ad Container</title>
+    <style>
+      html, body { margin: 0; min-height: 100%; background: #fff; font-family: Arial, sans-serif; color: #0A0A0A; }
+      main { min-height: 100vh; display: grid; place-items: center; padding: 24px; text-align: center; }
+      .box { max-width: 560px; border: 1px solid #eee; border-radius: 16px; padding: 24px; }
+      strong { color: #F5C518; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="box" id="ad-slot">
+        <h1>AdEarn Ad Slot</h1>
+        <p>Loading <strong id="network">ad</strong> placement...</p>
+      </div>
+    </main>
+    <script>
+      const params = new URLSearchParams(location.search);
+      const network = params.get("network");
+      const unitId = params.get("unit_id");
+      document.getElementById("network").textContent = network || "ad";
+
+      if (network === "adsterra") {
+        // TODO: Paste the real Adsterra script here and pass unitId to the placement code.
+      }
+
+      if (network === "monetag") {
+        // TODO: Paste the real Monetag script here and pass unitId to the placement code.
+      }
+
+      if (!unitId) {
+        document.getElementById("ad-slot").insertAdjacentHTML("beforeend", "<p>No ad unit id was provided.</p>");
+      }
+    </script>
+  </body>
+</html>

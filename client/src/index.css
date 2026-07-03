@@ -1,0 +1,184 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --brand-bg: #0a0a0c;
+    --brand-surface: #151518;
+    --brand-elevated: #1b1b20;
+    --brand-primary: #F5A524;
+    --brand-secondary: #FFD36A;
+    --brand-success: #22C55E;
+    --brand-danger: #EF4444;
+    --brand-text-primary: #FAFAFA;
+    --brand-text-secondary: #A1A1AA;
+    --brand-text-muted: #71717A;
+    --brand-border: rgba(255, 255, 255, 0.08);
+    --brand-glow: rgba(245, 165, 36, 0.15);
+  }
+
+  :root.light {
+    --brand-bg: #f9fafb;
+    --brand-surface: #ffffff;
+    --brand-elevated: #f3f4f6;
+    --brand-primary: #F5A524;
+    --brand-secondary: #d97706;
+    --brand-success: #16a34a;
+    --brand-danger: #dc2626;
+    --brand-text-primary: #111827;
+    --brand-text-secondary: #4b5563;
+    --brand-text-muted: #9ca3af;
+    --brand-border: rgba(0, 0, 0, 0.08);
+    --brand-glow: rgba(245, 165, 36, 0.08);
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    border-color: var(--brand-border);
+  }
+
+  html {
+    font-family: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+    background-color: var(--brand-bg);
+    color: var(--brand-text-primary);
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--brand-bg);
+    color: var(--brand-text-primary);
+    overflow-x: hidden;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Custom Selection */
+  ::selection {
+    background-color: rgba(245, 165, 36, 0.25);
+    color: #ffffff;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--brand-bg);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--brand-elevated);
+    border-radius: 9999px;
+    border: 2px solid var(--brand-bg);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--brand-text-muted);
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    background: rgba(21, 21, 24, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--brand-border);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .light .glass-card {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--brand-border);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+  }
+
+  .glass-card-elevated {
+    background: rgba(27, 27, 32, 0.55);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+  }
+
+  .light .glass-card-elevated {
+    background: rgba(243, 244, 246, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  }
+
+  .glow-primary {
+    box-shadow: 0 0 20px var(--brand-glow);
+  }
+
+  .glow-text-primary {
+    text-shadow: 0 0 12px var(--brand-glow);
+  }
+
+  /* Ambient Blur Blobs */
+  .ambient-blob {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(120px);
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .light .ambient-blob {
+    opacity: 0.08;
+    filter: blur(80px);
+  }
+
+  /* Fine noise background overlay */
+  .noise-bg {
+    position: relative;
+  }
+
+  .noise-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.02;
+    pointer-events: none;
+    z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  .light .noise-bg::before {
+    opacity: 0.01;
+  }
+
+  /* Text gradient helper */
+  .text-gradient {
+    background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .light .text-gradient {
+    background: linear-gradient(135deg, #111827 0%, #4b5563 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gradient-accent {
+    background: linear-gradient(135deg, #F5A524 0%, #FFD36A 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
